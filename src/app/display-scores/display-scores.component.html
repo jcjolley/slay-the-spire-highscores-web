@@ -1,3 +1,17 @@
-<p>
-  display-scores works!
-</p>
+<div class="row" *ngFor="let score of scoreService.scores">
+  <div class="col">
+    {{score.username}}
+  </div>
+  <div class="col">
+    {{score.score}}
+  </div>
+  <div class="col">
+    {{score.character}}
+  </div>
+  <div class="col">
+    {{score.level}}
+  </div>
+  <div class="col">
+    {{score.daily}}
+  </div>
+</div>

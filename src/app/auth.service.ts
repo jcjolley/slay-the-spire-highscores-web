@@ -5,8 +5,10 @@ import * as sha256 from 'sha256';
 import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class AuthService implements CanActivate {
-  isLoggedIn = false;
+  isLoggedIn;
   userId;
+  username;
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     if (!this.isLoggedIn) {
       this.router.navigate(['/', 'login']);
@@ -14,18 +16,22 @@ export class AuthService implements CanActivate {
     }
     return true;
   }
-  constructor(private router: Router, private http: HttpClient) { }
+
+  constructor(private router: Router, private http: HttpClient) {
+    this.isLoggedIn = false;
+  }
 
   async login(username: string, password: string) {
     const hashedPword = sha256.x2('sosalty' + password);
     const url = `http://jcjolley.com:3002/login`;
     const user = await this.http.post<{ username, password, _id }>(url, { username, password: hashedPword }).toPromise();
     if (!user) {
-      throw new Error('Login failed.')
+      throw new Error('Login failed.');
     }
+    this.isLoggedIn = true;
     console.log('user: ', user);
     this.userId = user._id;
-    this.isLoggedIn = true;
+    this.username = username;
     return true;
   }
 
@@ -37,6 +43,7 @@ export class AuthService implements CanActivate {
       throw new Error('Failed to create user.  User already exists.');
     }
     this.isLoggedIn = true;
+    this.username = username;
     return true;
   }
 }

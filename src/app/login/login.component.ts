@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   async login() {
     await this.authService.login(this.username, this.password);
     if (this.authService.isLoggedIn) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/', 'add-score']);
     }
   }
 
