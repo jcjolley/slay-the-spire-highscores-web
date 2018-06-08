@@ -19,13 +19,12 @@ export class DisplayScoresComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.getScores();
+    setInterval(() => this.getScores(), 2000);
   }
 
   async getScores() {
     await this.scoreService.getScores();
     this.dataSource.data = this.scoreService.scores;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {

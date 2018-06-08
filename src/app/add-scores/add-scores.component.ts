@@ -23,6 +23,7 @@ export class AddScoreComponent implements OnInit {
   }
 
   submitScore() {
+    console.log('Seed in component is: ', this.seed);
     this.scoreService.addScore(this.score, this.character, this.levels.findIndex(x => x === this.level), this.daily, this.seed);
     this.router.navigate(['/', 'display-scores']);
   }

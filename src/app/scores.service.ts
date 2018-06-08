@@ -18,6 +18,7 @@ export class ScoresService {
   }
 
   async addScore(score, character, level = 0, daily = false, seed = '') {
+    console.log('Seed when adding score is: ', seed);
     const url = 'http://jcjolley.com:3002/slay-the-spire/add-score';
     const result = await this.http.post(url, {
       username: this.authService.username,
