@@ -8,7 +8,9 @@ import { AuthService } from './auth.service';
 export class ScoresService {
   scores;
   constructor(private http: HttpClient,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+    this.getScores();
+  }
 
   async getScores() {
     this.scores = await this.http.get('http://jcjolley.com:3002/slay-the-spire/get-scores').toPromise();

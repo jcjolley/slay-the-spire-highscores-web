@@ -1,21 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ScoresService } from '../scores.service';
-
+import { MatPaginator, MatSort, MatTableDataSource, MatTab, MatTable } from '@angular/material';
 @Component({
   selector: 'app-display-scores',
   templateUrl: './display-scores.component.html',
   styleUrls: ['./display-scores.component.styl']
 })
 export class DisplayScoresComponent implements OnInit {
-  constructor(public scoreService: ScoresService) { }
+  displayedColumns = ['username', 'score', 'character', 'level', 'daily', 'seed'];
+  dataSource: MatTableDataSource<ScoreData>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  constructor(public scoreService: ScoresService, private changeDetectorRef: ChangeDetectorRef) {
+    this.dataSource = new MatTableDataSource(this.scoreService.scores);
+  }
 
-  headers = ['Username', 'Score', 'Character', 'Ascension Level', 'Daily', 'Seed'];
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.getScores();
   }
 
   async getScores() {
     await this.scoreService.getScores();
+    this.dataSource.data = this.scoreService.scores;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+}
+
+export interface ScoreData {
+  username: string;
+  score: number;
+  character: string;
+  level: number;
+  daily: boolean;
+  seed: string;
 }

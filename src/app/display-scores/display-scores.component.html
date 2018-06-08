@@ -2,22 +2,45 @@
   <h1>High Scores</h1>
 </div>
 
-<div class="row mx-5">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Filter" [(ngModel)]="filter">
-  </mat-form-field>
-</div>
+<mat-form-field class="example-full-width">
+  <input matInput placeholder="Filter" (keyup)="applyFilter($event.target.value)">
+</mat-form-field>
 
-<table class='table'>
-  <tr>
-    <th *ngFor="let header of headers">{{header}}</th>
-  </tr>
-  <tr *ngFor="let score of scoreService.scores">
-    <td>{{score.username}}</td>
-    <td>{{score.score}}</td>
-    <td>{{score.character}}</td>
-    <td>{{score.level}}</td>
-    <td>{{score.daily}}</td>
-    <td>{{score.seed}}</td>
-  </tr>
-</table>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+      <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Score</th>
+      <td mat-cell *matCellDef="let row"> {{row.score}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="character">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Character</th>
+      <td mat-cell *matCellDef="let row"> {{row.character}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Level</th>
+      <td mat-cell *matCellDef="let row"> {{row.level}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="daily">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Daily?</th>
+      <td mat-cell *matCellDef="let row"> {{row.daily}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="seed">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Seed</th>
+      <td mat-cell *matCellDef="let row"> {{row.seed}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>
