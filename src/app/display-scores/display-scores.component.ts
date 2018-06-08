@@ -9,6 +9,7 @@ import { ScoresService } from '../scores.service';
 export class DisplayScoresComponent implements OnInit {
   constructor(public scoreService: ScoresService) { }
 
+  headers = ['Username', 'Score', 'Character', 'Ascension Level', 'Daily', 'Seed'];
   ngOnInit() {
     this.getScores();
   }

@@ -1,17 +1,23 @@
-<div class="row" *ngFor="let score of scoreService.scores">
-  <div class="col">
-    {{score.username}}
-  </div>
-  <div class="col">
-    {{score.score}}
-  </div>
-  <div class="col">
-    {{score.character}}
-  </div>
-  <div class="col">
-    {{score.level}}
-  </div>
-  <div class="col">
-    {{score.daily}}
-  </div>
+<div class="jumbotron">
+  <h1>High Scores</h1>
 </div>
+
+<div class="row mx-5">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Filter" [(ngModel)]="filter">
+  </mat-form-field>
+</div>
+
+<table class='table'>
+  <tr>
+    <th *ngFor="let header of headers">{{header}}</th>
+  </tr>
+  <tr *ngFor="let score of scoreService.scores">
+    <td>{{score.username}}</td>
+    <td>{{score.score}}</td>
+    <td>{{score.character}}</td>
+    <td>{{score.level}}</td>
+    <td>{{score.daily}}</td>
+    <td>{{score.seed}}</td>
+  </tr>
+</table>
