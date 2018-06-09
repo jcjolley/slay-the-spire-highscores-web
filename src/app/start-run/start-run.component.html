@@ -56,7 +56,14 @@
   <div class="col-lg-8">
     <div class="card">
       <div class="m-4">
-        <h3>Join/Start a run</h3>
+        <div class="row">
+          <div class="col">
+            <h3>Join/Start a run</h3>
+          </div>
+          <div class="col">
+            <button class="btn btn-lg btn-primary float-right" (click)="createRun()">Create New Run</button>
+          </div>
+        </div>
         <div *ngIf="shownSessions.length > 0">
           <div class="card my-3" *ngFor="let mySession of shownSessions">
             <div *ngIf="mySession.scores.length > 1">Current Leader:
@@ -101,9 +108,6 @@
               </tr>
             </table>
           </div>
-        </div>
-        <div>
-          <button class="btn btn-lg btn-primary float-right" (click)="createRun()">Create Run</button>
         </div>
       </div>
     </div>
