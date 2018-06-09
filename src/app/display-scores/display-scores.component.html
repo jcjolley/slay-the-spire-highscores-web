@@ -14,7 +14,7 @@
 <div class="row">
   <div class="col">
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <table mat-table [dataSource]="dataSource" matSort matSortActive="score" matSortDirection="desc">
 
         <ng-container matColumnDef="username">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
