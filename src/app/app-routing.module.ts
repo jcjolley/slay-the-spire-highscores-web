@@ -8,19 +8,13 @@ import { StartRunComponent } from './start-run/start-run.component';
 
 const routes: Routes = [
   {
-    path: 'add-score', component: AddScoreComponent,
-    canActivate: [AuthService]
-  },
-  {
     path: 'display-scores', component: DisplayScoresComponent,
     canActivate: [AuthService]
   },
-
   {
     path: 'start-run', component: StartRunComponent,
     canActivate: [AuthService]
   },
-
   { path: 'login', component: LoginComponent },
   {
     path: '',

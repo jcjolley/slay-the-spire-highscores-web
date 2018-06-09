@@ -1,11 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-  <nav>
-    <a class="m-5" href="/add-score">Add a score</a>
-    <a class="m-5" href="/display-scores">See highscores</a>
-    <a class="m-5" href="/start-run">Start a new run</a>
-
-    <button class="btn btn-sm btn-secondary" (click)="authService.logout()">Logout</button>
+  <nav style="background: lightblue">
+    <div class="row">
+      <div class="col">
+        <h3>Slay the Spire</h3>
+      </div>
+      <div class="col">
+        <a class="m-5 p-5" href="/display-scores">Highscores</a>
+      </div>
+      <div class="col">
+        <a class="m-5 p-5" href="/start-run">Run</a>
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-secondary" (click)="authService.logout()">Logout</button>
+      </div>
+    </div>
   </nav>
   <router-outlet></router-outlet>
 </div>

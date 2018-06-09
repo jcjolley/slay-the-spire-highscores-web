@@ -35,6 +35,12 @@ export class ScoresService {
     return result;
   }
 
+  async removeScore({ _id }) {
+    console.log('Id is: ', _id);
+    const url = 'http://jcjolley.com:3002/slay-the-spire/remove-score';
+    return await this.http.post(url, { _id }).toPromise();
+  }
+
   getTotalWins() {
     if (this.scores) {
       this.totalWins = R.pipe(

@@ -1,18 +1,23 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ScoresService } from '../scores.service';
 import { MatPaginator, MatSort, MatTableDataSource, MatTab, MatTable } from '@angular/material';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-display-scores',
   templateUrl: './display-scores.component.html',
   styleUrls: ['./display-scores.component.styl']
 })
 export class DisplayScoresComponent implements OnInit {
-  displayedColumns = ['username', 'score', 'character', 'level', 'daily', 'seed'];
+  displayedColumns = ['username', 'score', 'character', 'level', 'daily', 'seed', 'delete'];
   dataSource: MatTableDataSource<ScoreData>;
   cbSuccesses = {};
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(public scoreService: ScoresService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    public scoreService: ScoresService,
+    public authService: AuthService,
+    private changeDetectorRef: ChangeDetectorRef,
+  ) {
     this.dataSource = new MatTableDataSource(this.scoreService.scores);
   }
 
@@ -42,6 +47,11 @@ export class DisplayScoresComponent implements OnInit {
   cbSuccess(seed) {
     this.cbSuccesses[seed] = true;
     setTimeout(() => this.cbSuccesses[seed] = false, 4000);
+  }
+
+  async removeScore(score) {
+    const res = await this.scoreService.removeScore(score);
+    console.log('Result of remove is: ', res);
   }
 }
 

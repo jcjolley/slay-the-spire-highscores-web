@@ -25,6 +25,7 @@ import { ChatComponent } from './chat/chat.component';
 import { StartRunComponent } from './start-run/start-run.component';
 
 import { ClipboardModule } from 'ngx-clipboard';
+import { ScoreTableComponent } from './start-run/score-table/score-table.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -38,6 +39,7 @@ export function tokenGetter() {
     LoginComponent,
     ChatComponent,
     StartRunComponent,
+    ScoreTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,5 +74,6 @@ export function tokenGetter() {
 export class AppModule {
   constructor(public matIconRegistry: MatIconRegistry) {
     this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+    this.matIconRegistry.setDefaultFontSetClass('fa');
   }
 }
