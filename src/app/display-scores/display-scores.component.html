@@ -2,6 +2,11 @@
   <h1>High Scores</h1>
 </div>
 
+<div class="card" style="text-align: center">
+  <h3>Most Wins</h3>
+  <div *ngFor="let entry of scoreService.totalWins">{{entry[0]}}: {{entry[1]}}</div>
+</div>
+
 <mat-form-field class="example-full-width">
   <input matInput placeholder="Filter" (keyup)="applyFilter($event.target.value)">
 </mat-form-field>

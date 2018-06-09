@@ -33,6 +33,10 @@ export class DisplayScoresComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  getEntries(obj) {
+    return Object.entries(obj);
+  }
 }
 
 export interface ScoreData {
@@ -43,3 +47,5 @@ export interface ScoreData {
   daily: boolean;
   seed: string;
 }
+
+

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import * as R from 'ramda';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScoresService {
   scores;
+  totalWins;
   constructor(private http: HttpClient,
     private authService: AuthService) {
     this.getScores();
@@ -14,6 +16,7 @@ export class ScoresService {
 
   async getScores() {
     this.scores = await this.http.get('http://jcjolley.com:3002/slay-the-spire/get-scores').toPromise();
+    this.getTotalWins();
     return this.scores;
   }
 
@@ -31,4 +34,21 @@ export class ScoresService {
     await this.getScores();
     return result;
   }
+
+  getTotalWins() {
+    if (this.scores) {
+      this.totalWins = R.pipe(
+        R.filter(R.prop('seed')),
+        R.groupBy(R.prop('seed')),
+        R.toPairs(),
+        R.map(x => R.sortBy(R.descend(R.prop('score', x[1])), x[1])[0].username),
+        R.countBy(R.identity),
+        R.toPairs(),
+        R.sortBy(R.descend(R.prop('1')))
+      )(this.scores);
+      return this.totalWins;
+    }
+  }
+
+
 }
