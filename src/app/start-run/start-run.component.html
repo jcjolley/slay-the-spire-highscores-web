@@ -18,11 +18,14 @@
             </div>
           </div>
           <div class="col-md">
+            <mat-checkbox class="example-margin" [(ngModel)]="daily" (ngModelChange)="setupDaily()">Daily?</mat-checkbox>
+          </div>
+          <div class="col-md">
             <div>
               <strong>Ascension</strong>
             </div>
             <mat-form-field>
-              <mat-select placeholder="" [(ngModel)]="level" name="level" (ngModelChange)="filterSessions()">
+              <mat-select placeholder="" [(ngModel)]="level" name="level" (ngModelChange)="filterSessions()" [disabled]="daily">
                 <mat-option *ngFor="let myLevel of levels" [value]="myLevel">
                   {{myLevel}}
                 </mat-option>
@@ -35,7 +38,7 @@
               <strong>Seed</strong>
             </div>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="" [(ngModel)]="seed" (ngModelChange)="filterSessions()">
+              <input matInput placeholder="" [(ngModel)]="seed" (ngModelChange)="filterSessions()" [disabled]="daily">
             </mat-form-field>
           </div>
           <div class="col-md">

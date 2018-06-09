@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionsService } from '../sessions.service';
 import { AuthService } from '../auth.service';
 import { ScoresService } from '../scores.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-start-run',
@@ -72,7 +73,7 @@ export class StartRunComponent implements OnInit {
   archiveSession(session) {
     this.sessionsService.updateSession({
       _id: session._id,
-      archive: true
+      active: false
     });
   }
 
@@ -82,5 +83,19 @@ export class StartRunComponent implements OnInit {
     this.seed = undefined;
     this.showArchived = false;
     this.filterSessions();
+  }
+
+  setupDaily() {
+    if (this.daily) {
+      this.level = 'Default';
+      this.seed = this.getDailySeed();
+    } else {
+      this.seed = '';
+    }
+    this.filterSessions();
+  }
+
+  private getDailySeed() {
+    return 'Daily ' + moment().format('MM/DD/YYYY');
   }
 }
