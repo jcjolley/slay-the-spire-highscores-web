@@ -39,13 +39,20 @@ export class ScoresService {
     if (this.scores) {
       this.totalWins = R.pipe(
         R.filter(R.prop('seed')),
-        R.groupBy(R.prop('seed')),
+        R.groupBy(x => `${x.seed}-${x.character}`),
+        x => { console.log(x); return x; },
         R.toPairs(),
+        x => { console.log(x); return x; },
         R.map(x => x[1].sort((a, b) => parseInt(b.score, 10) - parseInt(a.score, 10))),
+        x => { console.log(x); return x; },
         R.map(R.path([0, 'username'])),
+        x => { console.log(x); return x; },
         R.countBy(R.identity),
+        x => { console.log(x); return x; },
         R.toPairs(),
+        x => { console.log(x); return x; },
         R.sortBy(R.descend(R.prop('1'))),
+        x => { console.log(x); return x; },
       )(this.scores);
       return this.totalWins;
     }

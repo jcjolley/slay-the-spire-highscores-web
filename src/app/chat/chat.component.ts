@@ -27,12 +27,14 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(input) {
-    const message = {
-      username: this.authService.username,
-      message: input,
-      time: Date.now()
-    };
-    this.socket.input.next(JSON.stringify(message));
+    if (input.length) {
+      const message = {
+        username: this.authService.username,
+        message: input,
+        time: Date.now()
+      };
+      this.socket.input.next(JSON.stringify(message));
+    }
     this.message = '';
   }
 
