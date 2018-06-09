@@ -18,6 +18,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 
+import { JwtModule } from '@auth0/angular-jwt';
+import { MessageService } from './message.service';
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +37,13 @@ import { MatSortModule } from '@angular/material/sort';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:3002'],
+        blacklistedRoutes: ['localhost:3002/login']
+      }
+    }),
     BrowserAnimationsModule,
     MatRadioModule,
     MatSelectModule,
@@ -40,7 +54,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule,
   ],
   providers: [
-    AuthService
+    AuthService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
