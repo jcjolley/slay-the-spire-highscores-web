@@ -41,10 +41,11 @@ export class ScoresService {
         R.filter(R.prop('seed')),
         R.groupBy(R.prop('seed')),
         R.toPairs(),
-        R.map(x => R.sortBy(R.descend(R.prop('score', x[1])), x[1])[0].username),
+        R.map(x => x[1].sort((a, b) => parseInt(b.score, 10) - parseInt(a.score, 10))),
+        R.map(R.path([0, 'username'])),
         R.countBy(R.identity),
         R.toPairs(),
-        R.sortBy(R.descend(R.prop('1')))
+        R.sortBy(R.descend(R.prop('1'))),
       )(this.scores);
       return this.totalWins;
     }
