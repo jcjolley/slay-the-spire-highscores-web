@@ -74,4 +74,9 @@ export class AuthService implements CanActivate {
       return false;
     }
   }
+
+  logout() {
+    localStorage.clear();
+    location.reload(true);
+  }
 }

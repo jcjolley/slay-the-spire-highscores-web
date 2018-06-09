@@ -2,40 +2,47 @@
   <div class="jumbotron">
     <h1>Add a score</h1>
   </div>
-  <div class="card clearfix">
-    <div class="row mx-5">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Seed (Optional)" [(ngModel)]="seed">
-      </mat-form-field>
-    </div>
-    <div class="row mx-5">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Score" [(ngModel)]="score">
-      </mat-form-field>
-    </div>
-    <div class="row mx-5">
-      <div class="form-group">
-        <mat-radio-group class="add-radio-group" [(ngModel)]="character">
-          <mat-radio-button class="add-radio-button" *ngFor="let myCharacter of characters" [value]="myCharacter">
-            {{myCharacter}}
-          </mat-radio-button>
-        </mat-radio-group>
+  <div class="row">
+    <div class="col">
+      <div class="card clearfix">
+        <div class="row mx-5">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Seed (Optional)" [(ngModel)]="seed">
+          </mat-form-field>
+        </div>
+        <div class="row mx-5">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Score" [(ngModel)]="score">
+          </mat-form-field>
+        </div>
+        <div class="row mx-5">
+          <div class="form-group">
+            <mat-radio-group class="add-radio-group" [(ngModel)]="character">
+              <mat-radio-button class="add-radio-button" *ngFor="let myCharacter of characters" [value]="myCharacter">
+                {{myCharacter}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row mx-5">
+          <div class="form-group">
+            <mat-form-field>
+              <mat-select placeholder="Select a level" [(ngModel)]="level" name="level">
+                <mat-option *ngFor="let myLevel of levels" [value]="myLevel">
+                  {{myLevel}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mx-5">
+          <mat-checkbox class="example-margin" [(ngModel)]="daily">Daily</mat-checkbox>
+        </div>
+        <button class="btn btn-primary btn-lg float-right" (click)="submitScore()">Submit</button>
       </div>
     </div>
-    <div class="row mx-5">
-      <div class="form-group">
-        <mat-form-field>
-          <mat-select placeholder="Select a level" [(ngModel)]="level" name="level">
-            <mat-option *ngFor="let myLevel of levels" [value]="myLevel">
-              {{myLevel}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <div class="col">
+      <app-chat></app-chat>
     </div>
-    <div class="row mx-5">
-      <mat-checkbox class="example-margin" [(ngModel)]="daily">Daily</mat-checkbox>
-    </div>
-    <button class="btn btn-primary btn-lg float-right" (click)="submitScore()">Submit</button>
   </div>
 </div>

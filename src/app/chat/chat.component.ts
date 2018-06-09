@@ -14,7 +14,10 @@ export class ChatComponent implements OnInit {
   constructor(private socket: WsService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.socket.connect().subscribe(x => this.messages.push(JSON.parse(x)));
+    this.socket.connect().subscribe(x => {
+      console.log('Recieved: ', x);
+      this.messages.push(JSON.parse(x));
+    });
   }
 
   sendMessage(input) {
