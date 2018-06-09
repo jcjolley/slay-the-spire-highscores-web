@@ -29,6 +29,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import { JwtModule } from '@auth0/angular-jwt';
 import { MessageService } from './message.service';
 import { ChatComponent } from './chat/chat.component';
+import { StartRunComponent } from './start-run/start-run.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -41,6 +42,7 @@ export function tokenGetter() {
     DisplayScoresComponent,
     LoginComponent,
     ChatComponent,
+    StartRunComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,8 +3,9 @@
   <nav>
     <a class="m-5" href="/add-score">Add a score</a>
     <a class="m-5" href="/display-scores">See highscores</a>
+    <a class="m-5" href="/start-run">Start a new run</a>
 
-    <button (click)="authService.logout()">Logout</button>
+    <button class="btn btn-sm btn-secondary" (click)="authService.logout()">Logout</button>
   </nav>
   <router-outlet></router-outlet>
 </div>
