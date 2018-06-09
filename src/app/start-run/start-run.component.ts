@@ -28,8 +28,11 @@ export class StartRunComponent implements OnInit {
     await this.sessionService.getSessions();
     this.shownSessions = this.sessionService.sessions
       .filter(x => this.character ? x.character === this.character : !!x)
+      .map(x => { console.log(x); return x; })
       .filter(x => this.level ? x.level === this.levels.findIndex(y => y === this.level) : !!x)
-      .filter(x => this.seed ? x.seed.includes(this.seed) : !!x);
+      .map(x => { console.log(x); return x; })
+      .filter(x => this.seed ? x.seed.includes(this.seed) : !!x)
+      .map(x => { console.log(x); return x; });
   }
 
   createRun() {

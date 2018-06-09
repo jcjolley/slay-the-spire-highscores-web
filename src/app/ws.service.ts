@@ -12,11 +12,7 @@ export class WsService {
   private url;
 
   constructor() {
-    if (location.href.includes('localhost')) {
-      this.url = 'ws://localhost:3003';
-    } else {
-      this.url = 'ws://jcjolley.com:3003';
-    }
+    this.url = 'ws://jcjolley.com:3003';
   }
 
   // this method returns an object which contains two observables

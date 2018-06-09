@@ -1,62 +1,75 @@
+<div class="jumbotron">
+  <h1>Let's get runnin'</h1>
+</div>
 <div class="row">
-  <div class="col">
-    <div>
-      Select a character
-    </div>
-    <div class="form-group">
-      <mat-radio-group class="add-radio-group" [(ngModel)]="character" (ngModelOnChange)="filterSessions()">
-        <mat-radio-button class="add-radio-button" *ngFor="let myCharacter of characters" [value]="myCharacter">
-          {{myCharacter}}
-        </mat-radio-button>
-      </mat-radio-group>
-    </div>
-    <div *ngIf="character">
-      Ascension
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-select placeholder="Select Ascension" [(ngModel)]="level" name="level" (ngModelOnChange)="filterSessions()">
-          <mat-option *ngFor="let myLevel of levels" [value]="myLevel">
-            {{myLevel}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="m-4">
+        <h3>Filters</h3>
+        <div class="row">
+          <div class="col-md">
+            <strong>Character</strong>
+            <div class="form-group">
+              <mat-radio-group class="add-radio-group" [(ngModel)]="character" (ngModelChange)="filterSessions()">
+                <mat-radio-button class="add-radio-button" *ngFor="let myCharacter of characters" [value]="myCharacter">
+                  {{myCharacter}}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="col-md">
+            <div>
+              <strong>Ascension</strong>
+            </div>
+            <mat-form-field>
+              <mat-select placeholder="" [(ngModel)]="level" name="level" (ngModelChange)="filterSessions()">
+                <mat-option *ngFor="let myLevel of levels" [value]="myLevel">
+                  {{myLevel}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Seed" [(ngModel)]="seed" (ngModelOnChange)="filterSessions()">
-      </mat-form-field>
+          </div>
+          <div class="col-md">
+            <div>
+              <strong>Seed</strong>
+            </div>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="" [(ngModel)]="seed" (ngModelChange)="filterSessions()">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="col">
-    <h1 *ngIf="character">{{character}}</h1>
-    <h1 *ngIf="level">{{level}}</h1>
-  </div>
-  <div class="col">
-    <div *ngIf="shownSessions.length > 0">
-      <table class="table">
-        <tr>
-          <th>Character</th>
-          <th>Ascension</th>
-          <th>Seed</th>
-          <th>Scores</th>
-          <th>Join</th>
-        </tr>
-        <tr *ngFor="let mySession of shownSessions">
-          <td>{{mySession.character}}</td>
-          <td>{{mySession.level}}</td>
-          <td>{{mySession.seed}}</td>
-          <td>{{mySession.scores}}</td>
-          <td>
-            <button class="btn btn-primary" (click)="joinSession(mySession)">Add Score</button>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div *ngIf="shownSessions.length === 0">
-      <button class="btn btn-lg btn-primary" (click)="createRun()">Create Run</button>
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="m-4">
+        <h3>Join/Start a run</h3>
+        <div *ngIf="shownSessions.length > 0">
+          <table class="table table-sm">
+            <tr>
+              <th>Character</th>
+              <th>Ascension</th>
+              <th>Seed</th>
+              <th>Scores</th>
+              <th>Join</th>
+            </tr>
+            <tr *ngFor="let mySession of shownSessions">
+              <td>{{mySession.character}}</td>
+              <td>{{mySession.level}}</td>
+              <td>{{mySession.seed}}</td>
+              <td>{{mySession.scores}}</td>
+              <td>
+                <button class="btn btn-primary" (click)="joinSession(mySession)">Add Score</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div *ngIf="shownSessions.length === 0">
+          <button class="btn btn-lg btn-primary" (click)="createRun()">Create Run</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
