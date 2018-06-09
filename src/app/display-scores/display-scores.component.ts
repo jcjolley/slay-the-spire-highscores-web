@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./display-scores.component.styl']
 })
 export class DisplayScoresComponent implements OnInit {
-  displayedColumns = ['username', 'score', 'character', 'level', 'daily', 'seed', 'delete'];
+  displayedColumns = ['username', 'score', 'character', 'level', 'seed', 'delete'];
   dataSource: MatTableDataSource<ScoreData>;
   cbSuccesses = {};
   @ViewChild(MatPaginator) paginator: MatPaginator;
