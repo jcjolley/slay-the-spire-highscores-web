@@ -20,7 +20,7 @@ export class StartRunComponent implements OnInit {
   cbSuccesses = {};
   shownSessions = [];
   sessionScores = {};
-
+  showArchived = false;
   constructor(
     public sessionsService: SessionsService,
     private authService: AuthService,
@@ -35,11 +35,10 @@ export class StartRunComponent implements OnInit {
     await this.sessionsService.getSessions();
     this.shownSessions = this.sessionsService.sessions
       .filter(x => this.character ? x.character === this.character : !!x)
-      .map(x => { console.log(x); return x; })
       .filter(x => this.level ? x.level === this.levels.findIndex(y => y === this.level) : !!x)
-      .map(x => { console.log(x); return x; })
       .filter(x => this.seed ? x.seed.includes(this.seed) : !!x)
-      .map(x => { console.log(x); return x; });
+      .filter(x => this.showArchived ? !!x : x.active === true)
+      .sort((a, b) => b.timestamp - a.timestamp);
     this.shownSessions.forEach(x => {
       if (!this.sessionScores[x._id]) {
         this.sessionScores[x._id] = 0;
@@ -47,12 +46,13 @@ export class StartRunComponent implements OnInit {
     });
   }
 
-  createRun() {
-    this.sessionsService.addSession({
+  async createRun() {
+    await this.sessionsService.addSession({
       character: this.character,
       level: this.levels.findIndex(x => x === this.level),
       seed: this.seed
     });
+    this.filterSessions();
   }
 
   cbSuccess(seed) {
@@ -61,8 +61,26 @@ export class StartRunComponent implements OnInit {
   }
 
   submitScore(session) {
-    this.scoreService.addScore(this.sessionScores[session._id], session.character, session.level, session.daily, session.seed);
+    const score = this.sessionScores[session._id];
+    if (score > 0) {
+      this.scoreService.addScore(this.sessionScores[session._id], session.character, session.level, session.daily, session.seed);
+      this.sessionScores[session.id] = 0;
+    }
     this.filterSessions();
-    this.sessionScores[session.id] = 0;
+  }
+
+  archiveSession(session) {
+    this.sessionsService.updateSession({
+      _id: session._id,
+      archive: true
+    });
+  }
+
+  clearFilters() {
+    this.character = undefined;
+    this.level = undefined;
+    this.seed = undefined;
+    this.showArchived = false;
+    this.filterSessions();
   }
 }
