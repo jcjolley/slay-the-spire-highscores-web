@@ -43,7 +43,13 @@
 
         <ng-container matColumnDef="seed">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Seed</th>
-          <td mat-cell *matCellDef="let row"> {{row.seed}} </td>
+          <td mat-cell *matCellDef="let row">
+            <button class="btn btn-sm" ngxClipboard [cbContent]="row.seed" (cbOnSuccess)="cbSuccess(row.seed)" [class.btn-light]="!cbSuccesses[row.seed]"
+              [class.btn-success]="cbSuccesses[row.seed]">
+              <mat-icon fontSet="fa" fontIcon="fa fa-clipboard" class="mx-2"></mat-icon>
+              {{row.seed}}
+            </button>
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

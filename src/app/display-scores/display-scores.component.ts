@@ -9,6 +9,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatTab, MatTable } from '@an
 export class DisplayScoresComponent implements OnInit {
   displayedColumns = ['username', 'score', 'character', 'level', 'daily', 'seed'];
   dataSource: MatTableDataSource<ScoreData>;
+  cbSuccesses = {};
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(public scoreService: ScoresService, private changeDetectorRef: ChangeDetectorRef) {
@@ -36,6 +37,11 @@ export class DisplayScoresComponent implements OnInit {
 
   getEntries(obj) {
     return Object.entries(obj);
+  }
+
+  cbSuccess(seed) {
+    this.cbSuccesses[seed] = true;
+    setTimeout(() => this.cbSuccesses[seed] = false, 4000);
   }
 }
 

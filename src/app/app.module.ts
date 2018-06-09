@@ -17,19 +17,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
+import { MatIconModule, MatIconRegistry } from '@angular/material';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { MessageService } from './message.service';
 import { ChatComponent } from './chat/chat.component';
 import { StartRunComponent } from './start-run/start-run.component';
+
+import { ClipboardModule } from 'ngx-clipboard';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -64,16 +59,18 @@ export function tokenGetter() {
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    PerfectScrollbarModule,
+    MatIconModule,
+    ClipboardModule,
   ],
   providers: [
     AuthService,
     MessageService,
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },
+    MatIconRegistry,
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(public matIconRegistry: MatIconRegistry) {
+    this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+  }
+}

@@ -15,7 +15,7 @@ export class StartRunComponent implements OnInit {
   daily = false;
   character;
   seed;
-
+  cbSuccesses = {};
   shownSessions = [];
 
   constructor(public sessionService: SessionsService) { }
@@ -43,5 +43,9 @@ export class StartRunComponent implements OnInit {
     });
   }
 
+  cbSuccess(seed) {
+    this.cbSuccesses[seed] = true;
+    setTimeout(() => this.cbSuccesses[seed] = false, 4000);
+  }
 
 }

@@ -38,6 +38,9 @@
               <input matInput placeholder="" [(ngModel)]="seed" (ngModelChange)="filterSessions()">
             </mat-form-field>
           </div>
+          <div class="col-md">
+            <mat-checkbox class="example-margin" [(ngModel)]="archived">Show Archived</mat-checkbox>
+          </div>
         </div>
       </div>
     </div>
@@ -58,7 +61,13 @@
             <tr *ngFor="let mySession of shownSessions">
               <td>{{mySession.character}}</td>
               <td>{{mySession.level}}</td>
-              <td>{{mySession.seed}}</td>
+              <td>
+                <button class="btn btn-sm" ngxClipboard [cbContent]="mySession.seed" (cbOnSuccess)="cbSuccess(mySession.seed)" [class.btn-light]="!cbSuccesses[mySession.seed]"
+                  [class.btn-success]="cbSuccesses[mySession.seed]">
+                  <i class="fa fa-clipboard mx-2"></i>
+                  {{mySession.seed}}
+                </button>
+              </td>
               <td>{{mySession.scores}}</td>
               <td>
                 <button class="btn btn-primary" (click)="joinSession(mySession)">Add Score</button>
