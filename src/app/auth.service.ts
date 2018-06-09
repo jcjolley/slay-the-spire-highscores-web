@@ -23,8 +23,8 @@ export class AuthService implements CanActivate {
       console.log('The token is: ', JSON.stringify(this.jwtService.decodeToken(token)));
       if (token) {
         const decoded = this.jwtService.decodeToken(token);
-        console.log(Date.now())
-        console.log(decoded.iat + decoded.expiresIn);
+        this.username = localStorage.getItem('username');
+        this.userId = localStorage.getItem('userId');
         return Date.now() / 1000 < decoded.iat + decoded.expiresIn;
       } else {
         this.router.navigate(['/', 'login']);
@@ -44,6 +44,8 @@ export class AuthService implements CanActivate {
       localStorage.setItem('access-token', encryptedToken);
       this.userId = user.userId;
       this.username = user.username;
+      localStorage.setItem('username', this.username);
+      localStorage.setItem('userId', this.userId);
       return user.username && user.userId;
     } catch (e) {
       this.messageService.sendErrorMessage(e, 'Failed to login');
@@ -58,6 +60,8 @@ export class AuthService implements CanActivate {
       localStorage.setItem('access-token', encryptedToken);
       this.userId = user.userId;
       this.username = user.username;
+      localStorage.setItem('username', this.username);
+      localStorage.setItem('userId', this.userId);
       console.log('userId: ', this.userId);
       console.log('username: ', this.username);
       const valid = !!user.userId && !!user.username;

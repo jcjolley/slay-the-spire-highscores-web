@@ -1,0 +1,9 @@
+<div class="card" style="height: 200px">
+  <div *ngFor="let chatMessage of messages" style="font-size: 80%">
+    <span style="font-size: 80%; color:dimgrey">[{{chatMessage.time | date: 'mediumTime'}}]</span>&nbsp;&nbsp;
+    <span style="color: royalblue">{{chatMessage.username}}:</span> {{chatMessage.message}}
+  </div>
+</div>
+<div class="form-group">
+  <input class="form-control form-control-sm" [(ngModel)]="message" (keyup.enter)="sendMessage($event.target.value)">
+</div>

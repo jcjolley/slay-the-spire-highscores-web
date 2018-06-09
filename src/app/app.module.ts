@@ -20,6 +20,7 @@ import { MatSortModule } from '@angular/material/sort';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { MessageService } from './message.service';
+import { ChatComponent } from './chat/chat.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -30,7 +31,8 @@ export function tokenGetter() {
     AppComponent,
     AddScoreComponent,
     DisplayScoresComponent,
-    LoginComponent
+    LoginComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

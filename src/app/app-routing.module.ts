@@ -10,12 +10,16 @@ const routes: Routes = [
     path: 'add-score', component: AddScoreComponent,
     canActivate: [AuthService]
   },
-  { path: 'display-scores', component: DisplayScoresComponent },
+  {
+    path: 'display-scores', component: DisplayScoresComponent,
+    canActivate: [AuthService]
+  },
   { path: 'login', component: LoginComponent },
   {
     path: '',
     redirectTo: 'display-scores',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthService]
   }
 ];
 
