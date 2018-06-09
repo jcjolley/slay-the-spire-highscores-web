@@ -50,30 +50,43 @@
       <div class="m-4">
         <h3>Join/Start a run</h3>
         <div *ngIf="shownSessions.length > 0">
-          <table class="table table-sm">
-            <tr>
-              <th>Character</th>
-              <th>Ascension</th>
-              <th>Seed</th>
-              <th>Scores</th>
-              <th>Join</th>
-            </tr>
-            <tr *ngFor="let mySession of shownSessions">
-              <td>{{mySession.character}}</td>
-              <td>{{mySession.level}}</td>
-              <td>
-                <button class="btn btn-sm" ngxClipboard [cbContent]="mySession.seed" (cbOnSuccess)="cbSuccess(mySession.seed)" [class.btn-light]="!cbSuccesses[mySession.seed]"
-                  [class.btn-success]="cbSuccesses[mySession.seed]">
-                  <i class="fa fa-clipboard mx-2"></i>
-                  {{mySession.seed}}
-                </button>
-              </td>
-              <td>{{mySession.scores}}</td>
-              <td>
-                <button class="btn btn-primary" (click)="joinSession(mySession)">Add Score</button>
-              </td>
-            </tr>
-          </table>
+          <div class="card" *ngFor="let mySession of shownSessions">
+            <table class="table table-sm">
+              <tr>
+                <th>Character</th>
+                <th>Ascension</th>
+                <th colspan="2">Seed</th>
+              </tr>
+              <tr>
+                <td>{{mySession.character}}</td>
+                <td>{{mySession.level}}</td>
+                <td>
+                  <button class="btn btn-sm" ngxClipboard [cbContent]="mySession.seed" (cbOnSuccess)="cbSuccess(mySession.seed)" [class.btn-light]="!cbSuccesses[mySession.seed]"
+                    [class.btn-success]="cbSuccesses[mySession.seed]">
+                    <i class="fa fa-clipboard mx-2"></i>
+                    {{mySession.seed}}
+                  </button>
+                </td>
+                <td>
+                  <div class="input-group input-group-sm">
+                    <input class="form-control form-control-sm" placeholder="Score" [(ngModel)]="sessionScores[mySession._id]" (keydown.enter)="submitScore(mySession); $event.target.value = ''">
+                    <div class="input-group-append">
+                      <i class="fa fa-plus fa-lg input-group-text" (click)="submitScore(mySession)" style="color: green"></i>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <table *ngIf="mySession.scores" class="table table-sm" style="font-size:80%">
+              <tr>
+                <th colspan="2">Scores</th>
+              </tr>
+              <tr *ngFor="let score of mySession.scores">
+                <td>{{score.username}}</td>
+                <td>{{score.score}}</td>
+              </tr>
+            </table>
+          </div>
         </div>
         <div *ngIf="shownSessions.length === 0">
           <button class="btn btn-lg btn-primary" (click)="createRun()">Create Run</button>
