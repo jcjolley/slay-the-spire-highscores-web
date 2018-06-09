@@ -47,6 +47,7 @@ export class ScoresService {
         R.filter(R.prop('seed')),
         R.groupBy(x => `${x.seed}-${x.character}`),
         R.toPairs(),
+        R.filter(x => x[1].length > 1),
         R.map(x => x[1].sort((a, b) => parseInt(b.score, 10) - parseInt(a.score, 10))),
         R.map(R.path([0, 'username'])),
         R.countBy(R.identity),

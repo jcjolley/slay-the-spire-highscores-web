@@ -59,6 +59,9 @@
         <h3>Join/Start a run</h3>
         <div *ngIf="shownSessions.length > 0">
           <div class="card my-3" *ngFor="let mySession of shownSessions">
+            <div *ngIf="mySession.scores.length > 1">Current Leader:
+              <strong style="color: blue">{{mySession.scores[0].username}}</strong>
+            </div>
             <table class="table table-sm">
               <tr>
                 <th>Character</th>
