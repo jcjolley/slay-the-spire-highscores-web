@@ -26,6 +26,7 @@
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
+    "ngx-perfect-scrollbar": "^6.2.0",
     "queueing-subject": "^0.3.0",
     "ramda": "^0.25.0",
     "rxjs": "^6.0.0",

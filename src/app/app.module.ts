@@ -18,6 +18,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
+
 import { JwtModule } from '@auth0/angular-jwt';
 import { MessageService } from './message.service';
 import { ChatComponent } from './chat/chat.component';
@@ -32,7 +40,7 @@ export function tokenGetter() {
     AddScoreComponent,
     DisplayScoresComponent,
     LoginComponent,
-    ChatComponent
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,10 +62,15 @@ export function tokenGetter() {
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    PerfectScrollbarModule,
   ],
   providers: [
     AuthService,
-    MessageService
+    MessageService,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
   ],
   bootstrap: [AppComponent]
 })
