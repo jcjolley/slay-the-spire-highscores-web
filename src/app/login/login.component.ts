@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
   username = '';
   password = '';
+  isLogin = true;
   constructor(private authService: AuthService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() { }
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     try {
       const isLoggedIn = await this.authService.login(this.username, this.password);
       if (isLoggedIn) {
-        swal('Success', "You're all logged in", 'success');
+        swal('Success', `You're all logged in`, 'success');
         this.router.navigate(['/', 'add-score']);
       } else {
         swal('Error', 'Failed to login', 'error');

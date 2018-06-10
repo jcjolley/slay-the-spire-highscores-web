@@ -26,6 +26,7 @@ import { StartRunComponent } from './start-run/start-run.component';
 
 import { ClipboardModule } from 'ngx-clipboard';
 import { ScoreTableComponent } from './start-run/score-table/score-table.component';
+import { NotesComponent } from './start-run/notes/notes.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -40,6 +41,7 @@ export function tokenGetter() {
     ChatComponent,
     StartRunComponent,
     ScoreTableComponent,
+    NotesComponent,
   ],
   imports: [
     BrowserModule,

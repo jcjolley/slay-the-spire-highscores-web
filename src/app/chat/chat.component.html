@@ -1,5 +1,5 @@
 <div class="card" #scrollMe style="height: 200px; max-height: 200px; overflow-y: hidden; font-size: 80%; min-width: 300px"
-  (scroll)="onScroll($event.target)">
+  (scroll)="onScroll()">
   <div *ngFor="let chatMessage of messages">
     <span style="font-size: 80%; color:dimgrey">[{{chatMessage.time | date: 'mediumTime'}}]</span>&nbsp;&nbsp;
     <span style="color: royalblue">{{chatMessage.username}}:</span> {{chatMessage.message}}
