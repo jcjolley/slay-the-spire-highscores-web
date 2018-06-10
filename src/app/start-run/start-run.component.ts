@@ -31,7 +31,6 @@ export class StartRunComponent implements OnInit {
 
   ngOnInit() {
     this.filterSessions();
-    setInterval(() => this.filterSessions(), 5000);
   }
 
   async filterSessions() {

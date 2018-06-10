@@ -1,0 +1,26 @@
+<div>
+  <strong> Notes </strong>
+</div>
+<div class="card" style="font-size: 80%;">
+  <div *ngIf="showLoading">
+    <i class="fa fa-spinner fa-pulse fa-2x"></i>
+  </div>
+  <div *ngIf="!showLoading">
+    <div *ngFor="let note of session.notes">
+      <span style=" color:dimgrey">[{{note.time | date: 'mediumTime'}}]</span>&nbsp;&nbsp;
+      <span style="color: royalblue">{{note.username}}:</span> {{note.message}}
+    </div>
+  </div>
+  <div>
+    <div class="row">
+      <div class="col">
+        Add note:
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control form-control-sm" [(ngModel)]="newNote.message" (keydown.enter)="addNote()">
+      </div>
+    </div>
+  </div>
+</div>
