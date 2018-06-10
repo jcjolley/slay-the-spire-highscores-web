@@ -22,6 +22,7 @@ export class StartRunComponent implements OnInit {
   shownSessions = [];
   sessionScores = {};
   showArchived = false;
+  showLoading = false;
   constructor(
     public sessionsService: SessionsService,
     private authService: AuthService,
@@ -30,6 +31,7 @@ export class StartRunComponent implements OnInit {
 
   ngOnInit() {
     this.filterSessions();
+    setInterval(() => this.filterSessions(), 5000);
   }
 
   async filterSessions() {
@@ -48,12 +50,14 @@ export class StartRunComponent implements OnInit {
   }
 
   async createRun() {
+    this.showLoading = true;
     await this.sessionsService.addSession({
       character: this.character,
       level: this.levels.findIndex(x => x === this.level),
       seed: this.seed
     });
-    this.filterSessions();
+    await this.filterSessions();
+    this.showLoading = false;
   }
 
   cbSuccess(seed) {
@@ -61,20 +65,25 @@ export class StartRunComponent implements OnInit {
     setTimeout(() => this.cbSuccesses[seed] = false, 4000);
   }
 
-  submitScore(session) {
+  async submitScore(session) {
+    this.showLoading = true;
     const score = this.sessionScores[session._id];
     if (score > 0) {
-      this.scoreService.addScore(this.sessionScores[session._id], session.character, session.level, session.daily, session.seed);
+      await this.scoreService.addScore(this.sessionScores[session._id], session.character, session.level, session.daily, session.seed);
       this.sessionScores[session.id] = 0;
     }
-    this.filterSessions();
+    await this.filterSessions();
+    this.showLoading = false;
   }
 
-  archiveSession(session) {
-    this.sessionsService.updateSession({
+  async archiveSession(session) {
+    this.showLoading = true;
+    await this.sessionsService.updateSession({
       _id: session._id,
       active: false
     });
+    await this.filterSessions();
+    this.showLoading = false;
   }
 
   clearFilters() {
@@ -96,6 +105,10 @@ export class StartRunComponent implements OnInit {
   }
 
   private getDailySeed() {
-    return 'Daily ' + moment().format('MM/DD/YYYY');
+    const time = moment();
+    if (time.hours() > 18) {
+      time.date(time.date() + 1);
+    }
+    return 'Daily ' + time.format('MM/DD/YYYY');
   }
 }

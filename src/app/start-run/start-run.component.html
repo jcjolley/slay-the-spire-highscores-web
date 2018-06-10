@@ -118,3 +118,7 @@
     <app-chat class="float-right"></app-chat>
   </div>
 </div>
+<div *ngIf="showLoading" style="position: fixed; min-height:95%; width:95%; top:2.5%; left: 2.5%; background: lightcyan; z-index: 9999; text-align: center; margin: auto; box-shadow: 5px 5px 5px grey">
+  <h1 style="margin-top: 10%">Loading</h1>
+  <i class="fa fa-spinner fa-pulse fa-4x"></i>
+</div>
