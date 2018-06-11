@@ -21,14 +21,17 @@ export class NotesComponent implements OnInit {
   }
 
   async addNote() {
-    this.showLoading = true;
-    this.newNote.username = this.authService.username;
-    this.newNote.time = Date.now();
-    this.session.notes.push(this.newNote);
-    const res = await this.sessionService.updateSession(this.session);
-    console.log(res);
-    this.showLoading = false;
-    return res;
+    if (this.newNote.message && this.newNote.message.length > 0) {
+      this.showLoading = true;
+      this.newNote.username = this.authService.username;
+      this.newNote.time = Date.now();
+      this.session.notes.push(this.newNote);
+      const res = await this.sessionService.updateSession(this.session);
+      console.log(res);
+      this.showLoading = false;
+      this.newNote = { username: '', message: '', time: 0 };
+      return res;
+    }
   }
 
 }
