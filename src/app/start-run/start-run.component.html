@@ -44,6 +44,9 @@
           <div class="col-md">
             <mat-checkbox class="example-margin" [(ngModel)]="showArchived" (ngModelChange)="filterSessions()">Show Archived</mat-checkbox>
           </div>
+          <div class="col-md">
+            <mat-checkbox class="example-margin" [(ngModel)]="hideAlreadyRun" (ngModelChange)="filterSessions()">Hide runs you've already run.</mat-checkbox>
+          </div>
         </div>
         <div class="row">
           <div class="col">

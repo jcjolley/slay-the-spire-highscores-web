@@ -23,6 +23,7 @@ export class StartRunComponent implements OnInit {
   sessionScores = {};
   showArchived = false;
   showLoading = false;
+  hideAlreadyRun = false;
   constructor(
     public sessionsService: SessionsService,
     private authService: AuthService,
@@ -40,6 +41,7 @@ export class StartRunComponent implements OnInit {
       .filter(x => this.level ? x.level === this.levels.findIndex(y => y === this.level) : !!x)
       .filter(x => this.seed ? x.seed.includes(this.seed) : !!x)
       .filter(x => this.showArchived ? !!x : x.active === true)
+      .filter(x => this.hideAlreadyRun ? !x.scores.map(y => y.username).includes(this.authService.username) : !!x)
       .sort((a, b) => b.timestamp - a.timestamp);
     this.shownSessions.forEach(x => {
       if (!this.sessionScores[x._id]) {
