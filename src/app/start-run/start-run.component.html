@@ -87,7 +87,6 @@
                 <td>
                   <button class="btn btn-sm" ngxClipboard [cbContent]="mySession.seed" (cbOnSuccess)="cbSuccess(mySession.seed)" [class.btn-light]="!cbSuccesses[mySession.seed]"
                     [class.btn-success]="cbSuccesses[mySession.seed]">
-                    <i class="fa fa-clipboard mx-2"></i>
                     {{mySession.seed}}
                   </button>
                 </td>

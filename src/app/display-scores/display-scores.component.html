@@ -46,7 +46,6 @@
           <td mat-cell *matCellDef="let row">
             <button class="btn btn-sm" ngxClipboard [cbContent]="row.seed" (cbOnSuccess)="cbSuccess(row.seed)" [class.btn-light]="!cbSuccesses[row.seed]"
               [class.btn-success]="cbSuccesses[row.seed]">
-              <mat-icon fontSet="fa" fontIcon="fa fa-clipboard"></mat-icon>
               {{row.seed}}
             </button>
           </td>
