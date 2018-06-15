@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
       const isLoggedIn = await this.authService.login(this.username, this.password);
       if (isLoggedIn) {
         swal('Success', `You're all logged in`, 'success');
-        this.router.navigate(['/', 'add-score']);
+        this.router.navigateByUrl('/#/add-score');
       } else {
         swal('Error', 'Failed to login', 'error');
       }
@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
     try {
       const isLoggedIn = await this.authService.createUser(this.username, this.password);
       if (isLoggedIn) {
-        this.router.navigate(['/', 'add-score']);
+        swal('Success', `Created user`, 'success');
+        this.router.navigateByUrl('/#/add-score');
       } else {
         swal('Error', 'Failed to create user', 'error');
       }
