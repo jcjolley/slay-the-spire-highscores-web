@@ -14,16 +14,31 @@ export class StartRunComponent implements OnInit {
     'Ascension 5', 'Ascension 6', 'Ascension 7', 'Ascension 8', 'Ascension 9', 'Ascension 10'];
   characters = ['Ironclad', 'Silent', 'Defect'];
   score = 0;
-  level;
+  level = 'Default';
   daily = false;
-  character;
-  seed;
+  character = 'Ironclad';
+  seed = 'DRAFT';
   cbSuccesses = {};
   shownSessions = [];
   sessionScores = {};
   showArchived = false;
   showLoading = false;
   hideAlreadyRun = false;
+  usePreset = true;
+  seeds = [
+    ['RAND0M0DS', 'New daily-style runs.'],
+    ['DAILYM0DS', 'New daily-style runs.'],
+    ['DRAFT', 'Activate the draft daily mod'],
+    ['MEGADRAFT', 'Diverse and Draft'],
+    ['FADEAWAY', 'Night Terrors and Terminal'],
+    ['PRAISESNECK0', 'Will replace your starting relic with Snecko Eye'],
+    ['Y0URET00SL0W', 'Will activate the Time Dilation daily mod, giving all enemies Slow'],
+    ['STARTERDECK', 'Busted Crown and Binary'],
+    ['INCEPTI0N', 'Unceasing Top'],
+    ['MYTRUEFORM', `Start with one of each 'Form' card.`],
+    ['1HITW0NDER', 'Can you beat the game with 1 Max HP?']
+  ];
+
   constructor(
     public sessionsService: SessionsService,
     private authService: AuthService,

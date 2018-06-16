@@ -34,13 +34,30 @@
 
           </div>
           <div class="col-md">
-            <div>
-              <strong>Seed</strong>
+            <strong>Seed Type</strong>
+            <div class="form-group">
+              <mat-radio-group class="add-radio-group" [(ngModel)]="usePreset">
+                <mat-radio-button class="add-radio-button" [value]="true">Preset</mat-radio-button>
+                <mat-radio-button class="add-radio-button" [value]="false">Manual</mat-radio-button>
+              </mat-radio-group>
             </div>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="" [(ngModel)]="seed" (ngModelChange)="filterSessions()" [disabled]="daily">
+          </div>
+
+          <div class="col-md mt-0" *ngIf="usePreset">
+            <mat-form-field>
+              <mat-select placeholder="Preset Seeds" [(value)]="seed">
+                <mat-option *ngFor="let mySeed of seeds" [value]="mySeed[0]">
+                  {{ mySeed[0] }} - {{ mySeed[1] }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
+          <div class="col-md" *ngIf="!usePreset">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Manual Seed" [(ngModel)]="seed" (ngModelChange)="filterSessions()" [disabled]="daily">
+            </mat-form-field>
+          </div>
+
           <div class="col-md">
             <mat-checkbox class="example-margin" [(ngModel)]="showArchived" (ngModelChange)="filterSessions()">Show Archived</mat-checkbox>
           </div>
@@ -64,7 +81,7 @@
             <h3>Join/Start a run</h3>
           </div>
           <div class="col">
-            <button class="btn btn-lg btn-primary float-right" (click)="createRun()">Create New Run</button>
+            <button class="btn btn-lg btn-primary float-right" (click)="createRun()" [disabled]="!seed || !character || !level">Create New Run</button>
           </div>
         </div>
         <div *ngIf="shownSessions.length > 0">
