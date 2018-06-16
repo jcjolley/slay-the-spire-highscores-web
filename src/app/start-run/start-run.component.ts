@@ -14,17 +14,17 @@ export class StartRunComponent implements OnInit {
     'Ascension 5', 'Ascension 6', 'Ascension 7', 'Ascension 8', 'Ascension 9', 'Ascension 10'];
   characters = ['Ironclad', 'Silent', 'Defect'];
   score = 0;
-  level = 'Default';
+  level = '';
   daily = false;
-  character = 'Ironclad';
-  seed = 'DRAFT';
+  character = '';
+  seed = '';
   cbSuccesses = {};
   shownSessions = [];
   sessionScores = {};
   showArchived = false;
   showLoading = false;
   hideAlreadyRun = false;
-  usePreset = true;
+  usePreset = false;
   seeds = [
     ['RAND0M0DS', 'New daily-style runs.'],
     ['DAILYM0DS', 'New daily-style runs.'],
